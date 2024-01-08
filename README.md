@@ -13,6 +13,11 @@ This is a Kotlin Multiplatform project targeting Android, iOS.
   you need this entry point for your iOS app. This is also where you should add SwiftUI code for
   your project.
 
+
+
+https://github.com/santimattius/kmp-mobile-notifications/assets/22333101/24847570-54d2-4d5b-b402-4d68b138c682
+
+
 ## Prepare the environment
 
 - Install and configure the latest JDK 17+.
