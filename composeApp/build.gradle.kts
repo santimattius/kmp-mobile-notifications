@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlinSerialization)
+    id("com.google.gms.google-services")
 }
 
 kotlin {
@@ -22,6 +23,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
+            export("io.github.mirzemehdi:kmpnotifier:0.2.0")
             baseName = "ComposeApp"
             isStatic = true
         }
@@ -43,6 +45,9 @@ kotlin {
             implementation(libs.kotlinx.coroutines.android)
 
             implementation(libs.koin.android)
+
+            implementation("androidx.startup:startup-runtime:1.1.1")
+
         }
         val commonMain by getting {
             dependencies {
@@ -65,6 +70,8 @@ kotlin {
 
                 api(libs.koin.core)
                 api(libs.koin.compose)
+
+                api("io.github.mirzemehdi:kmpnotifier:0.2.0")
 
             }
         }
@@ -94,7 +101,7 @@ android {
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")
 
     defaultConfig {
-        applicationId = "com.santimattius.kmp.compose.skeleton"
+        applicationId = "com.santimattius.kmp.notifications"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1

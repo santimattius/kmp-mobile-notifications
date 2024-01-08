@@ -53,5 +53,22 @@ Otherwise, KDoctor will highlight which parts of your setup still need to be con
 suggest a way to fix
 them.
 
+## KMPNotifier
+Simple and easy to use Kotlin Multiplatform Push Notification library (using Firebase Cloud Messaging) targeting ios and android.
+You can check out [Documentation](https://mirzemehdi.github.io/KMPNotifier) for full library api information.
+
+Github Repo: https://github.com/mirzemehdi/KMPNotifier
+
+## Firebase Cloud Messaging
+
+Check this documentation https://firebase.google.com/docs/cloud-messaging
+
+### Setup your google-services.json and Google-Service-Info.plist
+
+- for iOS download Google-Service-Info.plist and move to /iosApp/iosApp in this project.
+- for Android download google-services.json and move to /composeApp/src in this project.
+
+
+
 Learn more
 about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)

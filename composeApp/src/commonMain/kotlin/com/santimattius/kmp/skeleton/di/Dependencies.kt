@@ -22,7 +22,7 @@ val sharedModules = module {
 }
 
 val homeModule = module {
-    factory { HomeScreenModel(repository = get()) }
+    factory { HomeScreenModel() }
 }
 
 

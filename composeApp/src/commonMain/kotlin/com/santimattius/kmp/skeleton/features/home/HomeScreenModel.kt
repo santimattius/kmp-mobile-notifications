@@ -1,40 +1,28 @@
 package com.santimattius.kmp.skeleton.features.home
 
 import cafe.adriel.voyager.core.model.StateScreenModel
-import cafe.adriel.voyager.core.model.screenModelScope
-import com.santimattius.kmp.skeleton.core.data.PictureRepository
-import com.santimattius.kmp.skeleton.core.domain.Picture
-import kotlinx.coroutines.CoroutineExceptionHandler
+import com.mmk.kmpnotifier.notification.NotifierManager
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 
 
 data class HomeUiState(
-    val isLoading: Boolean = false,
-    val hasError: Boolean = false,
-    val data: Picture? = null,
+    val title: String = "",
+    val content: String = "",
 )
 
-class HomeScreenModel(
-    private val repository: PictureRepository,
-) : StateScreenModel<HomeUiState>(HomeUiState()) {
+class HomeScreenModel : StateScreenModel<HomeUiState>(HomeUiState()) {
 
-    private val exceptionHandler = CoroutineExceptionHandler { _, _ ->
-        mutableState.update { it.copy(isLoading = false, hasError = true) }
+    fun onTitleChange(value: String) {
+        mutableState.update { it.copy(title = value) }
     }
 
-    init {
-        randomImage()
+    fun onContentChange(value: String) {
+        mutableState.update { it.copy(content = value) }
     }
 
-    fun randomImage() {
-        mutableState.update { it.copy(isLoading = true) }
-        screenModelScope.launch(exceptionHandler) {
-            repository.random().onSuccess { picture ->
-                mutableState.update { it.copy(isLoading = false, data = picture) }
-            }.onFailure {
-                mutableState.update { it.copy(isLoading = false, hasError = true) }
-            }
-        }
+    fun sendNotification() {
+        val notifier = NotifierManager.getLocalNotifier()
+        val currentState = mutableState.value
+        notifier.notify(currentState.title, currentState.content)
     }
 }
